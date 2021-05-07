@@ -21,13 +21,29 @@ router.get('/api/workouts', (req,res) => {
 });
 
 // Post a workout
-router.post("/api/workouts", ({ body }, res) => {
-    db.Workout.create(body)
+router.post('/api/workouts', ({ body }, res) => {
+    db.Workout.create({$push: { exercises: {body}}})
         .then((newWorkout) => {
             res.json(newWorkout);
         })
         .catch((err) => res.json(err));
 });
+
+
+router.put('/api/workouts/:id', ({ body, params}, res) => {
+    db.Workout.findByIdAndUpdate(
+        params.id,
+        // push into exercises array in the workout collection
+        {$push: { exercises: body }},
+        // Set new to true to return modified document rather than the original
+        {new: true }
+    )
+        .then((updatedWorkout) => {
+            res.json(updatedWorkout)
+        })
+        .catch((err) => res.json(err));
+});
+
 
 
 
