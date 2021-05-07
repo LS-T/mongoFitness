@@ -14,11 +14,22 @@ router.get('/api/workouts', (req,res) => {
 
         }
     ])
-        .then((previousWorkouts) => {
-            res.json(previousWorkouts);
+        .then((workoutDuration) => {
+            res.json(workoutDuration);
         })
         .catch((err) => res.json(err));
 });
+
+// Post a workout
+router.post("/api/workouts", ({ body }, res) => {
+    db.Workout.create(body)
+        .then((newWorkout) => {
+            res.json(newWorkout);
+        })
+        .catch((err) => res.json(err));
+});
+
+
 
 
 
