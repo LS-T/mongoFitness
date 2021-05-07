@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { reverse } = require("methods");
 const { Workout } = require("../models");
 const db = require("../models");
 
@@ -43,6 +44,29 @@ router.put('/api/workouts/:id', ({ body, params}, res) => {
         })
         .catch((err) => res.json(err));
 });
+
+
+
+// Get total duration of workouts from last 7 days
+router.get(`/api/workouts/range`, (req, res) => {
+    Workout.aggregate([
+        {
+            $addFields: {
+                totalDuration: {$sum: '$exercises.duration' },
+            }
+        }
+    ])
+    // sort from most recent to least recent , and limit it to 7 workouts
+    .sort({_id: -1})
+    .limit(7)
+    .then((workout) => {
+        mostRecent = workout.reverse();
+        res.json(reverse);
+    })
+    .catch((err) => res.json(err))
+});
+
+
 
 
 
