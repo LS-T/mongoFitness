@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
+// Create workout collection
 const WorkoutSchema = new Schema({
   day: {
       type: Date,
