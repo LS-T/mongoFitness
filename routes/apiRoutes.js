@@ -23,7 +23,7 @@ router.get('/api/workouts', (req,res) => {
 
 // Post a workout
 router.post('/api/workouts', ({ body }, res) => {
-    db.Workout.create({$push: { exercises: {body}}})
+    db.Workout.create(body)
         .then((newWorkout) => {
             res.json(newWorkout);
         })
@@ -56,12 +56,12 @@ router.get(`/api/workouts/range`, (req, res) => {
             }
         }
     ])
-    // sort from most recent to least recent , and limit it to 7 workouts
+    // sort from descending id_ , and limit it to 7 workouts
     .sort({_id: -1})
     .limit(7)
     .then((workout) => {
         mostRecent = workout.reverse();
-        res.json(reverse);
+        res.json(mostRecent);
     })
     .catch((err) => res.json(err))
 });
