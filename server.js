@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(logger("dev"));
 
-// fix deprecation warnings 
+// connect db to heroku 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false,
