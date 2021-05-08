@@ -12,6 +12,11 @@ This fitness tracker allows a user to keep track of their workouts and add or re
             I want to be able to see a weekly report of my workouts on the dashboard
             SO that I can accurately keep track of my exercises by weight, reps, set, resistance/cardio.
 
+# Deployed 
+
+https://polar-woodland-49819.herokuapp.com/
+
+
 
             
 
